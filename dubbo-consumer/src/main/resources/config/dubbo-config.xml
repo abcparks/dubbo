@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application name="dubbo-consumer"/>
+
+    <dubbo:registry address="nacos://localhost:8848"/>
+
+    <!--payload="83886080" 放开dubbo数据传输限制-->
+    <dubbo:protocol name="dubbo" port="20884" payload="83886080"/>
+
+    <dubbo:service interface="cn.alex.dubbo.inter.service.IGoddessService" ref="goddessService"/>
+
+
+    <dubbo:consumer check="false" retries="0" timeout="5000"/>
+
+    <dubbo:reference id="bookService" interface="cn.alex.dubbo.inter.service.IBookService"
+                     check="false" retries="0"
+                     timeout="5000" reconnect="true" version="2.0">
+        <dubbo:method name="getBookList" retries="2"/>
+    </dubbo:reference>
+</beans>

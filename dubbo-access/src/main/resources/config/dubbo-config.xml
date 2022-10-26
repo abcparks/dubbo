@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+    <!--如果不提供服务, dubbo:application可以不用设置-->
+    <dubbo:application name="dubbo-access"/>
+
+    <dubbo:registry address="nacos://localhost:8848"/>
+
+    <!--
+        check="false" 关闭启动检查, 不管生产者服务是否存在/可用
+        retries="0" 设置重试次数, 不重试, dubbo在调用服务不成功时, 默认会重试两次
+                    新增, 修改, 删除关闭重试机制, 查询可以加上重试机制
+    -->
+    <dubbo:consumer check="false" retries="0" timeout="5000"/>
+
+    <dubbo:reference id="bookService" interface="cn.alex.dubbo.inter.service.IBookService"
+                     check="false" retries="0"
+                     timeout="5000" reconnect="true" version="2.0">
+        <dubbo:method name="getBookList" retries="2"/>
+    </dubbo:reference>
+
+    <dubbo:reference id="goddessService" interface="cn.alex.dubbo.inter.service.IGoddessService"/>
+
+</beans>
