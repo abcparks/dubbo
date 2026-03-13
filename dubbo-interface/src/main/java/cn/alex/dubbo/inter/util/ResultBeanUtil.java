@@ -1,6 +1,7 @@
 package cn.alex.dubbo.inter.util;
 
 import cn.alex.dubbo.inter.common.ResultBean;
+import cn.alex.dubbo.inter.enums.ResultCode;
 
 /**
  * Created by WCY on 2022/10/24
@@ -12,7 +13,7 @@ public class ResultBeanUtil {
     }
 
     public static ResultBean<Object> success(String message, Object data) {
-        return getResult(1, message, data);
+        return new ResultBean<>(ResultCode.SUCCESS.getCode(), message, data);
     }
 
     public static ResultBean<Object> error(Object data) {
@@ -20,11 +21,7 @@ public class ResultBeanUtil {
     }
 
     public static ResultBean<Object> error(String message, Object data) {
-        return getResult(0, message, data);
-    }
-
-    public static ResultBean<Object> getResult(int code, String message, Object data) {
-        return new ResultBean<>(code, message, data);
+        return new ResultBean<>(ResultCode.ERROR.getCode(), message, data);
     }
 
 }

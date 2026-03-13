@@ -25,8 +25,8 @@ public class AccessController {
         loadbalance = "roundrobin", 按权重随机
         loadbalance = "random", 按权重轮询
      */
-    //@DubboReference(version = "1.0", loadbalance = "random", reconnect = "true")
     @Autowired
+    //@DubboReference(version = "1.0", loadbalance = "random", reconnect = "true")
     private IBookService bookService;
 
     @Autowired
