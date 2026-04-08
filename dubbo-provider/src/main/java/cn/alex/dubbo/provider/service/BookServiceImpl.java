@@ -3,6 +3,7 @@ package cn.alex.dubbo.provider.service;
 import cn.alex.dubbo.inter.entity.Book;
 import cn.alex.dubbo.inter.service.IBookService;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.apache.dubbo.rpc.RpcContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,8 @@ public class BookServiceImpl implements IBookService {
 
     @Override
     public List<Book> getBookList() {
+        String context = RpcContext.getContext().getAttachment("context");
+        System.out.println("context = " + context);
         Book book = new Book();
         book.setBookId(20882L);
         book.setBookName("格林童话");

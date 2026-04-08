@@ -10,5 +10,6 @@ spring:
 logging:
   level:
     cn.alex: debug
+    org.apache.dubbo: debug
   pattern:
     dateformat: HH:mm:ss:SSS

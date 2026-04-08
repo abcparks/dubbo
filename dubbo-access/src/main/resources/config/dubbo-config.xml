@@ -14,7 +14,7 @@
         retries="0" 设置重试次数, 不重试, dubbo在调用服务不成功时, 默认会重试两次
                     新增, 修改, 删除关闭重试机制, 查询可以加上重试机制
     -->
-    <dubbo:consumer check="false" retries="0" timeout="5000"/>
+    <dubbo:consumer check="false" retries="0" timeout="50000"/>
 
     <dubbo:reference id="bookService" interface="cn.alex.dubbo.inter.service.IBookService"
                      check="false" retries="0"
